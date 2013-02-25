@@ -31,3 +31,36 @@ c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSSSiteManag
 c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSSSiteManager\obj\Debug\RedditRSSSiteManager.csprojResolveAssemblyReference.cache
 c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSSSiteManager\obj\Debug\RedditRSSSiteManager.dll
 c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSSSiteManager\obj\Debug\RedditRSSSiteManager.pdb
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\RedditRSSSiteManager.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\RedditRSSSiteManager.pdb
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\Antlr3.Runtime.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\AspNet.ScriptManager.jQuery.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.AspNet.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.Core.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.OAuth.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.OpenId.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\EntityFramework.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\Microsoft.ScriptManager.MSAjax.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\Microsoft.ScriptManager.WebForms.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\RedditRSS.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\System.Web.Optimization.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\System.Web.Providers.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\WebGrease.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\Newtonsoft.Json.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\RedditRSS.pdb
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\EntityFramework.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.Core.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.OAuth.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.OpenId.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\bin\DotNetOpenAuth.AspNet.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\obj\Debug\RedditRSSSiteManager.csprojResolveAssemblyReference.cache
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\obj\Debug\RedditRSSSiteManager.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSSSiteManager\obj\Debug\RedditRSSSiteManager.pdb

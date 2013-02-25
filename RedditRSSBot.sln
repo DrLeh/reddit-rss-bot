@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSBotCS", "RSSBotCS\RSSBotCS.csproj", "{DD3F6F01-888D-4C91-A9E4-C0907318C05B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSS", "RedditRSS\RedditRSS.csproj", "{84EDCE30-7423-4336-950B-3C8BA622B806}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSSSiteManager", "RedditRSSSiteManager\RedditRSSSiteManager.csproj", "{E9C02852-ECE9-40B5-8D43-25F21B8881F6}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DD3F6F01-888D-4C91-A9E4-C0907318C05B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD3F6F01-888D-4C91-A9E4-C0907318C05B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD3F6F01-888D-4C91-A9E4-C0907318C05B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD3F6F01-888D-4C91-A9E4-C0907318C05B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{84EDCE30-7423-4336-950B-3C8BA622B806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84EDCE30-7423-4336-950B-3C8BA622B806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84EDCE30-7423-4336-950B-3C8BA622B806}.Release|Any CPU.ActiveCfg = Release|Any CPU

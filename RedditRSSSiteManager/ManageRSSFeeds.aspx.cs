@@ -30,14 +30,14 @@ namespace RedditRSSSiteManager
         }
 
         private string _messageCacheKey = "messagesCacheKey";
-        public string Messages
+        public List<string> Messages
         {
             get
             {
-                var t = (string)Cache[_messageCacheKey];
-                if (!string.IsNullOrEmpty(t))
-                    return t;
-                return "";
+                var t = (List<string>)Cache[_messageCacheKey];
+                if (t != null && !t.Any())
+                    t = new List<string>();
+                return t;
             }
             set { Cache[_messageCacheKey] = value; }
         }
@@ -54,10 +54,17 @@ namespace RedditRSSSiteManager
                 Manager.AddBot("http://feeds.arstechnica.com/arstechnica/everything", "ArsTechnicaRSS", "thelehmanlip", "ocsid7", 5, BotMessageSent);
                 //Manager.AddBot("http://www.rsspect.com/rss/qwantz.xml", "dinosaurcomics", "thelehmanlip", "ocsid7", 5, BotMessageSent);
             }
-            var bots = Manager.Bots;
-            gvBots.DataSource = bots;
-            gvBots.DataBind();
-            lblMessages.Text = Messages;
+            //var bots = Manager.Bots;
+            //gvBots.DataSource = bots;
+            //gvBots.DataBind();
+            if (Messages != null && Messages.Any())
+            {
+                var text = "<ul>";
+                foreach (var x in Messages)
+                    text += "<li>" + x + "</li>";
+                text += "</ul>";
+                lblMessages.Text = text;
+            }
         }
 
         private List<RedditUser> GetRedditUsers()
@@ -91,7 +98,11 @@ namespace RedditRSSSiteManager
 
         protected void BotMessageSent(object sender, MessageEventArgs e)
         {
-            Messages += e.Message + "\n";
+            var msgs = Messages;
+            if (msgs == null)
+                msgs = new List<string>();
+            msgs.Add(e.Message);
+            Messages = msgs;
         }
 
         protected void btnAddFeed_Click(object sender, EventArgs e)
@@ -114,6 +125,18 @@ namespace RedditRSSSiteManager
             {
                 Manager.StopBot(id);
             }
+            gvBots.DataBind();
+        }
+
+        // The return type can be changed to IEnumerable, however to support
+        // paging and sorting, the following parameters must be added:
+        //     int maximumRows
+        //     int startRowIndex
+        //     out int totalRowCount
+        //     string sortByExpression
+        public IQueryable<RedditRSS.RedditRSSBot> gvBots_GetData()
+        {
+            return Manager.Bots.AsQueryable();
         }
     }
 }

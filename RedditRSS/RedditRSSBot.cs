@@ -24,13 +24,20 @@ namespace RedditRSS
             public string cookie;
         }
 
-        public class RedditSubmissionData
+        public class RedditSubmission
         {
             public string Title { get; set; }
             public string Url { get; set; }
             public string SubReddit { get; set; }
             public string Username { get; set; }
             public string Password { get; set; }
+
+            public bool Equals(RedditSubmission b)
+            {
+                return this.Title == b.Title
+                    && this.SubReddit == b.SubReddit
+                    && this.Url == b.SubReddit;
+            }
         }
 
         #endregion
@@ -38,13 +45,23 @@ namespace RedditRSS
 
         #region Properties
 
+        public const string REDDIT_URI = "http://www.reddit.com/api/submit";
+
         public enum BotStatus
         {
             NotStarted,
             Started,
             Stopped
         }
+
         public BotStatus CurrentStatus { get; set; }
+        public bool Started
+        {
+            get
+            {
+                return CurrentStatus == BotStatus.Started;
+            }
+        }
 
         public int ID { get; set; }
         public string Username { get; set; }
@@ -52,17 +69,27 @@ namespace RedditRSS
         public string FeedUrl { get; set; }
         public string Subreddit { get; set; }
 
-        private int _minutesToCheck = 5;
-
+        private int _interval = 5;
         public int Interval
         {
-            get { return _minutesToCheck; }
-            set { _minutesToCheck = value; }
+            get { return _interval; }
+            set { _interval = value; }
         }
 
-        public bool Started { get; set; }
+        private int _submissionsToStore = 10;
+        public int SubmissionsToStore
+        {
+            get { return _submissionsToStore; }
+            set { _submissionsToStore = value; }
+        }
 
-        #endregion 
+        public Queue<RedditSubmission> LastSubmitted
+        {
+            get;
+            set;
+        }
+
+        #endregion
 
 
         #region Events
@@ -76,7 +103,7 @@ namespace RedditRSS
 
         public RedditRSSBot()
         {
-
+            LastSubmitted = new Queue<RedditSubmission>();
         }
 
         #endregion
@@ -99,52 +126,45 @@ namespace RedditRSS
             ExecutionThread.Abort();
         }
 
+        public const int READ_COUNT = 10;
         public void WatchFeed()
         {
-            string lastLinkSubmitted = null;
             while (true)
             {
-                var rsd = Read();
-                if (rsd != null && (lastLinkSubmitted == null || rsd.Url != lastLinkSubmitted))
+                var rsds = Read(READ_COUNT);
+                foreach (var rsd in rsds)
                 {
                     Submit(rsd);
-                    lastLinkSubmitted = rsd.Url;
-                }
-                else if (lastLinkSubmitted != null && lastLinkSubmitted == rsd.Url)
-                {
-                    OnSendMessage("This link submitted already.");
                 }
                 Thread.Sleep(Interval * 60 * 1000);
             }
         }
 
-        public RedditSubmissionData Read()
+        public List<RedditSubmission> Read(int readCount = 1)
         {
-            RedditSubmissionData rsd = null;
+            var list = new List<RedditSubmission>();
             try
             {
                 SyndicationFeed feed = SyndicationFeed.Load(XmlReader.Create(FeedUrl));
-                var item = feed.Items.OrderByDescending(x => x.PublishDate).FirstOrDefault();
-                if (item != null)
+                var items = feed.Items.OrderByDescending(x => x.PublishDate).Take(readCount);
+                foreach(var item in items)
                 {
-                    rsd = new RedditSubmissionData();
-                    rsd.Title = item.Title.Text;
+                    var rs = new RedditSubmission();
+                    rs.Title = item.Title.Text;
                     var link = item.Links.FirstOrDefault();
-                    rsd.Url = link != null ? link.Uri.ToString() : null;
-                    rsd.SubReddit = Subreddit;
-                    rsd.Username = Username;
-                    rsd.Password = Password;
+                    rs.Url = link != null ? link.Uri.ToString() : null;
+                    rs.SubReddit = Subreddit;
+                    rs.Username = Username;
+                    rs.Password = Password;
+                    list.Add(rs);
                 }
             }
-            catch (Exception x)
+            catch (Exception)
             {
                 OnSendMessage("Error reading feed: " + FeedUrl);
             }
-            return rsd;
+            return list;
         }
-
-
-        public const string REDDIT_URI = "http://www.reddit.com/api/submit";
 
         public RedditLoginData Login(string username, string password)
         {
@@ -163,59 +183,71 @@ namespace RedditRSS
             return loginData;
         }
 
-        public void Submit(RedditSubmissionData rsd)
-        {
-            Submit(rsd.Title, rsd.Url, rsd.SubReddit, rsd.Username, rsd.Password);
-        }
-
         public void Submit(string title, string url, string subreddit, string username, string password)
         {
-            var loginData = Login(username, password);
-            if (!string.IsNullOrEmpty(loginData.modhash))
+            Submit(new RedditSubmission() { Title = title, Url = url, SubReddit = subreddit, Username = username, Password = password });
+        }
+
+        public void Submit(RedditSubmission rs)
+        {
+            //submit if not already submitted
+            if (!LastSubmitted.Any(x => x.Equals(rs)))
             {
-                var parameters = "";
-                parameters += "kind=link";
-                parameters += "&url=" + HttpUtility.UrlEncode(url);
-                parameters += "&title=" + HttpUtility.UrlEncode(title);
-                parameters += "&sr=" + HttpUtility.UrlEncode(subreddit);
-                parameters += "&r=" + HttpUtility.UrlEncode(subreddit);
-                parameters += "&uh=" + HttpUtility.UrlEncode(loginData.modhash);
-
-                var cookies = new CookieContainer();
-                var cookie = new Cookie("reddit_session", HttpUtility.UrlEncode(loginData.cookie), "/api/submit", "reddit.com");
-                cookie.Secure = false;
-                cookie.Expires = DateTime.MinValue;
-                cookies.Add(cookie);
-
-                var tryAgainMessageReceieved = true;
-                string response = null;
-                while (tryAgainMessageReceieved)
+                //need to try storing this instead of doing it on every submit. might need to do it anyway though.
+                var loginData = Login(rs.Username, rs.Password);
+                if (!string.IsNullOrEmpty(loginData.modhash))
                 {
-                    response = HttpPost(REDDIT_URI, parameters, cookies);
-                    if (response.Contains("try again in"))
+                    var parameters = "";
+                    parameters += "kind=link";
+                    parameters += "&url=" + HttpUtility.UrlEncode(rs.Url);
+                    parameters += "&title=" + HttpUtility.UrlEncode(rs.Title);
+                    parameters += "&sr=" + HttpUtility.UrlEncode(rs.SubReddit);
+                    parameters += "&r=" + HttpUtility.UrlEncode(rs.SubReddit);
+                    parameters += "&uh=" + HttpUtility.UrlEncode(loginData.modhash);
+
+                    var cookies = new CookieContainer();
+                    var cookie = new Cookie("reddit_session", HttpUtility.UrlEncode(loginData.cookie), "/api/submit", "reddit.com");
+                    cookie.Secure = false;
+                    cookie.Expires = DateTime.MinValue;
+                    cookies.Add(cookie);
+
+                    var tryAgainMessageReceieved = true;
+                    string response = null;
+                    while (tryAgainMessageReceieved)
                     {
-                        tryAgainMessageReceieved = true;
-                        //this line yet untested
-                        //var tryAgainMinutes = int.Parse(response.Substring(response.IndexOf("try again in "), 14));
-                        var tryAgainMinutes = 3;
-                        Thread.Sleep(tryAgainMinutes * 60 * 1000);
-                        OnSendMessage("Trying to submit too much, trying again in " + tryAgainMinutes + " minutes");
+                        response = HttpPost(REDDIT_URI, parameters, cookies);
+                        if (response.Contains("try again in"))
+                        {
+                            tryAgainMessageReceieved = true;
+                            //this line yet untested
+                            //var tryAgainMinutes = int.Parse(response.Substring(response.IndexOf("try again in "), 14));
+                            var tryAgainMinutes = 3;
+                            Thread.Sleep(tryAgainMinutes * 60 * 1000);
+                            OnSendMessage("Trying to submit too much, trying again in " + tryAgainMinutes + " minutes");
+                        }
+                        else if (response.Contains("that link has already been submitted"))
+                        {
+                            tryAgainMessageReceieved = false;
+                            OnSendMessage("This link has already been submitted: /r/" + rs.SubReddit + " Title: " + rs.Title + " url: " + rs.Url);
+                        }
+                        else
+                        {
+                            tryAgainMessageReceieved = false;
+                            OnSendMessage("Post submitted: /r/" + rs.SubReddit + " Title: " + rs.Title + " url: " + rs.Url);
+                        }
                     }
-                    if (response.Contains("that link has already been submitted"))
-                    {
-                        tryAgainMessageReceieved = false;
-                        OnSendMessage("This link has already been submitted: /r/" + subreddit + " Title: " + title + " url: " + url);
-                    }
-                    else
-                    {
-                        tryAgainMessageReceieved = false;
-                        OnSendMessage("Post submitted: /r/" + subreddit + " Title: " + title + " url: " + url);
-                    }
+                    LastSubmitted.Enqueue(rs);
+                    if (LastSubmitted.Count > SubmissionsToStore)
+                        LastSubmitted.Dequeue();
+                }
+                else
+                {
+                    OnSendMessage("Login failed");
                 }
             }
             else
             {
-                OnSendMessage("Login failed");
+                OnSendMessage("Link already submitted.");
             }
         }
 
