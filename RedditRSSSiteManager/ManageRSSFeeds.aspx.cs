@@ -51,8 +51,8 @@ namespace RedditRSSSiteManager
                 ddlUsers.DataSource = users;
                 ddlUsers.DataBind();
 
-                Manager.AddBot("http://feeds.arstechnica.com/arstechnica/everything", "ArsTechnicaRSS", "thelehmanlip", "ocsid7", 5, BotMessageSent);
-                //Manager.AddBot("http://www.rsspect.com/rss/qwantz.xml", "dinosaurcomics", "thelehmanlip", "ocsid7", 5, BotMessageSent);
+                //Manager.AddBot("http://feeds.arstechnica.com/arstechnica/everything", "ArsTechnicaRSS", "", "", 5, BotMessageSent);
+                //Manager.AddBot("http://www.rsspect.com/rss/qwantz.xml", "dinosaurcomics", "", "", 5, BotMessageSent);
             }
             //var bots = Manager.Bots;
             //gvBots.DataSource = bots;
