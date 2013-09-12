@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RedditRSSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RedditRSSEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="AppUsers" EntityType="RedditRSSModel.AppUser" />
+    <EntitySet Name="RedditRSSBotDatas" EntityType="RedditRSSModel.RedditRSSBotData" />
+    <EntitySet Name="RedditUsers" EntityType="RedditRSSModel.RedditUser" />
+    <AssociationSet Name="FK__RedditUse__AppUs__1273C1CD" Association="RedditRSSModel.FK__RedditUse__AppUs__1273C1CD">
+      <End Role="AppUser" EntitySet="AppUsers" />
+      <End Role="RedditUser" EntitySet="RedditUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RedditRSS__Reddi__164452B1" Association="RedditRSSModel.FK__RedditRSS__Reddi__164452B1">
+      <End Role="RedditUser" EntitySet="RedditUsers" />
+      <End Role="RedditRSSBotData" EntitySet="RedditRSSBotDatas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AppUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="HashedPassword" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="RedditUsers" Relationship="RedditRSSModel.FK__RedditUse__AppUs__1273C1CD" FromRole="AppUser" ToRole="RedditUser" />
+  </EntityType>
+  <EntityType Name="RedditRSSBotData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="FeedUrl" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+    <Property Name="Subreddit" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Interval" Type="Int32" Nullable="false" />
+    <Property Name="RedditUserID" Type="Int32" />
+    <NavigationProperty Name="RedditUser" Relationship="RedditRSSModel.FK__RedditRSS__Reddi__164452B1" FromRole="RedditRSSBotData" ToRole="RedditUser" />
+  </EntityType>
+  <EntityType Name="RedditUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="HashedPassword" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="AppUserID" Type="Int32" />
+    <NavigationProperty Name="AppUser" Relationship="RedditRSSModel.FK__RedditUse__AppUs__1273C1CD" FromRole="RedditUser" ToRole="AppUser" />
+    <NavigationProperty Name="RedditRSSBotDatas" Relationship="RedditRSSModel.FK__RedditRSS__Reddi__164452B1" FromRole="RedditUser" ToRole="RedditRSSBotData" />
+  </EntityType>
+  <Association Name="FK__RedditUse__AppUs__1273C1CD">
+    <End Role="AppUser" Type="RedditRSSModel.AppUser" Multiplicity="0..1" />
+    <End Role="RedditUser" Type="RedditRSSModel.RedditUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditUser">
+        <PropertyRef Name="AppUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RedditRSS__Reddi__164452B1">
+    <End Role="RedditUser" Type="RedditRSSModel.RedditUser" Multiplicity="0..1" />
+    <End Role="RedditRSSBotData" Type="RedditRSSModel.RedditRSSBotData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedditUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditRSSBotData">
+        <PropertyRef Name="RedditUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

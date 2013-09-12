@@ -1,0 +1,15 @@
+c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSS\obj\Debug\RedditRSS.csprojResolveAssemblyReference.cache
+c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSS\bin\Debug\RedditRSS.dll
+c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSS\bin\Debug\RedditRSS.pdb
+c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSS\bin\Debug\Newtonsoft.Json.dll
+c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSS\obj\Debug\RedditRSS.dll
+c:\Users\Devon\documents\visual studio 2012\Projects\RSSBotCS\RedditRSS\obj\Debug\RedditRSS.pdb
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Debug\RedditRSS.dll.config
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Debug\RedditRSS.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Debug\RedditRSS.pdb
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Debug\EntityFramework.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Debug\EntityFramework.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\obj\Debug\RedditRSS.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\obj\Debug\RedditRSS.pdb

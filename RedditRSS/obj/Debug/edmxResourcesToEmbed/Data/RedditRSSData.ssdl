@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RedditRSSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="RedditRSSModelStoreContainer">
+    <EntitySet Name="AppUsers" EntityType="RedditRSSModel.Store.AppUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RedditRSSBotDatas" EntityType="RedditRSSModel.Store.RedditRSSBotDatas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RedditUsers" EntityType="RedditRSSModel.Store.RedditUsers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__RedditUse__AppUs__1273C1CD" Association="RedditRSSModel.Store.FK__RedditUse__AppUs__1273C1CD">
+      <End Role="AppUser" EntitySet="AppUsers" />
+      <End Role="RedditUser" EntitySet="RedditUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RedditRSS__Reddi__164452B1" Association="RedditRSSModel.Store.FK__RedditRSS__Reddi__164452B1">
+      <End Role="RedditUser" EntitySet="RedditUsers" />
+      <End Role="RedditRSSBotData" EntitySet="RedditRSSBotDatas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AppUsers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="HashedPassword" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RedditRSSBotDatas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FeedUrl" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="Subreddit" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Interval" Type="int" Nullable="false" />
+    <Property Name="RedditUserID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="RedditUsers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="HashedPassword" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="AppUserID" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="FK__RedditUse__AppUs__1273C1CD">
+    <End Role="AppUser" Type="RedditRSSModel.Store.AppUsers" Multiplicity="0..1" />
+    <End Role="RedditUser" Type="RedditRSSModel.Store.RedditUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditUser">
+        <PropertyRef Name="AppUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RedditRSS__Reddi__164452B1">
+    <End Role="RedditUser" Type="RedditRSSModel.Store.RedditUsers" Multiplicity="0..1" />
+    <End Role="RedditRSSBotData" Type="RedditRSSModel.Store.RedditRSSBotDatas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedditUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditRSSBotData">
+        <PropertyRef Name="RedditUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

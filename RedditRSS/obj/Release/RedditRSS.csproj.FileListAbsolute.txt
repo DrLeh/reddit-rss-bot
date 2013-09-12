@@ -1,0 +1,10 @@
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\obj\Release\RedditRSS.csprojResolveAssemblyReference.cache
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\RedditRSS.dll.config
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\RedditRSS.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\RedditRSS.pdb
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\EntityFramework.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\Newtonsoft.Json.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\EntityFramework.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\Newtonsoft.Json.xml
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\obj\Release\RedditRSS.dll
+C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\obj\Release\RedditRSS.pdb

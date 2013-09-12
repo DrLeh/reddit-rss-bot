@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RedditRSSModelStoreContainer" CdmEntityContainer="RedditRSSEntities">
+    <EntitySetMapping Name="AppUsers">
+      <EntityTypeMapping TypeName="RedditRSSModel.AppUser">
+        <MappingFragment StoreEntitySet="AppUser">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="HashedPassword" ColumnName="HashedPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RedditRSSBotDatas">
+      <EntityTypeMapping TypeName="RedditRSSModel.RedditRSSBotData">
+        <MappingFragment StoreEntitySet="RedditRSSBotData">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FeedUrl" ColumnName="FeedUrl" />
+          <ScalarProperty Name="Subreddit" ColumnName="Subreddit" />
+          <ScalarProperty Name="Interval" ColumnName="Interval" />
+          <ScalarProperty Name="RedditUserID" ColumnName="RedditUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RedditUsers">
+      <EntityTypeMapping TypeName="RedditRSSModel.RedditUser">
+        <MappingFragment StoreEntitySet="RedditUser">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="HashedPassword" ColumnName="HashedPassword" />
+          <ScalarProperty Name="AppUserID" ColumnName="AppUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
