@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RedditRSS.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,37 +16,18 @@ namespace RedditRSS
 {
     public class RedditRSSBot
     {
+        #region Events
 
-        #region Nested Classes
-
-        public class RedditLoginData
-        {
-            public string modhash;
-            public string cookie;
-        }
-
-        public class RedditSubmission
-        {
-            public string Title { get; set; }
-            public string Url { get; set; }
-            public string SubReddit { get; set; }
-            public string Username { get; set; }
-            public string Password { get; set; }
-
-            public bool Equals(RedditSubmission b)
-            {
-                return this.Title == b.Title
-                    && this.SubReddit == b.SubReddit
-                    && this.Url == b.SubReddit;
-            }
-        }
+        public event EventHandler<MessageEventArgs> SendMessage;
 
         #endregion
 
-
         #region Properties
 
+
+        public const int READ_COUNT = 10;
         public const string REDDIT_URI = "http://www.reddit.com/api/submit";
+        private Thread ExecutionThread;
 
         public enum BotStatus
         {
@@ -55,26 +37,8 @@ namespace RedditRSS
         }
 
         public BotStatus CurrentStatus { get; set; }
-        public bool Started
-        {
-            get
-            {
-                return CurrentStatus == BotStatus.Started;
-            }
-        }
-
-        public int ID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string FeedUrl { get; set; }
-        public string Subreddit { get; set; }
-
-        private int _interval = 5;
-        public int Interval
-        {
-            get { return _interval; }
-            set { _interval = value; }
-        }
+        public bool Started { get { return CurrentStatus == BotStatus.Started; } }
+        public Queue<RedditSubmission> LastSubmitted { get; set; }
 
         private int _submissionsToStore = 10;
         public int SubmissionsToStore
@@ -83,18 +47,29 @@ namespace RedditRSS
             set { _submissionsToStore = value; }
         }
 
-        public Queue<RedditSubmission> LastSubmitted
+        public RedditRSSBotData RedditRSSBotData { get; set; }
+
+        public int ID { get { return RedditRSSBotData.ID; } }
+        public int Interval
         {
-            get;
-            set;
+            get { return this.RedditRSSBotData.Interval; }
+            set { this.RedditRSSBotData.Interval = value; }
         }
 
-        #endregion
-
-
-        #region Events
-
-        public event EventHandler<MessageEventArgs> SendMessage;
+        public int? AppUserID
+        {
+            get
+            {
+                return this.RedditRSSBotData.RedditUser.AppUserID;
+            }
+        }
+        public AppUser AppUser
+        {
+            get
+            {
+                return this.RedditRSSBotData.RedditUser.AppUser;
+            }
+        }
 
         #endregion
 
@@ -111,7 +86,6 @@ namespace RedditRSS
 
         #region Methods
 
-        private Thread ExecutionThread;
 
         public void Start()
         {
@@ -126,7 +100,6 @@ namespace RedditRSS
             ExecutionThread.Abort();
         }
 
-        public const int READ_COUNT = 10;
         public void WatchFeed()
         {
             while (true)
@@ -140,28 +113,28 @@ namespace RedditRSS
             }
         }
 
-        public List<RedditSubmission> Read(int readCount = 1)
+        public List<RedditSubmission> Read(int readCount)
         {
             var list = new List<RedditSubmission>();
             try
             {
-                SyndicationFeed feed = SyndicationFeed.Load(XmlReader.Create(FeedUrl));
+                SyndicationFeed feed = SyndicationFeed.Load(XmlReader.Create(RedditRSSBotData.FeedUrl));
                 var items = feed.Items.OrderByDescending(x => x.PublishDate).Take(readCount);
-                foreach(var item in items)
+                foreach (var item in items)
                 {
                     var rs = new RedditSubmission();
                     rs.Title = item.Title.Text;
                     var link = item.Links.FirstOrDefault();
                     rs.Url = link != null ? link.Uri.ToString() : null;
-                    rs.SubReddit = Subreddit;
-                    rs.Username = Username;
-                    rs.Password = Password;
+                    rs.SubReddit = RedditRSSBotData.Subreddit;
+                    rs.Username = RedditRSSBotData.RedditUser.Username;
+                    rs.Password = RedditRSSBotData.RedditUser.Password;
                     list.Add(rs);
                 }
             }
             catch (Exception)
             {
-                OnSendMessage("Error reading feed: " + FeedUrl);
+                OnSendMessage("Error reading feed: " + RedditRSSBotData.FeedUrl);
             }
             return list;
         }

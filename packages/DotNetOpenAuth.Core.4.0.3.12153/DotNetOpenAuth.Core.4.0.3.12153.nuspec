@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>DotNetOpenAuth.Core</id>
     <version>4.0.3.12153</version>
@@ -13,5 +13,6 @@
     <description>This package contains shared code for other NuGet packages, and contains no public API in and of itself.</description>
     <summary>Shared library implementing the messaging pipeline used by auxiliary DotNetOpenAuth libraries.</summary>
     <language>en-US</language>
+    <references />
   </metadata>
 </package>

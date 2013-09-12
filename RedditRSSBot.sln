@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSS", "RedditRSS\RedditRSS.csproj", "{84EDCE30-7423-4336-950B-3C8BA622B806}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSSSiteManager", "RedditRSSSiteManager\RedditRSSSiteManager.csproj", "{E9C02852-ECE9-40B5-8D43-25F21B8881F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSSManagerSite", "RedditRSSManagerSite\RedditRSSManagerSite.csproj", "{A5B99CBA-3B04-4345-9945-2E58002B7936}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		{84EDCE30-7423-4336-950B-3C8BA622B806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84EDCE30-7423-4336-950B-3C8BA622B806}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84EDCE30-7423-4336-950B-3C8BA622B806}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9C02852-ECE9-40B5-8D43-25F21B8881F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9C02852-ECE9-40B5-8D43-25F21B8881F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9C02852-ECE9-40B5-8D43-25F21B8881F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9C02852-ECE9-40B5-8D43-25F21B8881F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5B99CBA-3B04-4345-9945-2E58002B7936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B99CBA-3B04-4345-9945-2E58002B7936}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B99CBA-3B04-4345-9945-2E58002B7936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B99CBA-3B04-4345-9945-2E58002B7936}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

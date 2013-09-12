@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>DotNetOpenAuth.AspNet</id>
     <version>4.0.3.12153</version>
@@ -17,5 +17,6 @@
       <dependency id="DotNetOpenAuth.OpenId.RelyingParty" version="[4.0.3.12153]" />
       <dependency id="DotNetOpenAuth.OAuth.Consumer" version="[4.0.3.12153]" />
     </dependencies>
+    <references />
   </metadata>
 </package>
