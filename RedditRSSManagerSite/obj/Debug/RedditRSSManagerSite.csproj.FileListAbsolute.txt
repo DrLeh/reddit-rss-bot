@@ -51,12 +51,9 @@ C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Microsoft.AspNet.Web.Optimiz
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Microsoft.ScriptManager.MSAjax.dll
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Microsoft.ScriptManager.WebForms.dll
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Microsoft.Web.Infrastructure.dll
-C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\RedditRSS.dll
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\System.Web.Optimization.dll
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\System.Web.Providers.dll
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\WebGrease.dll
-C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Newtonsoft.Json.dll
-C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\RedditRSS.pdb
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\EntityFramework.xml
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\DotNetOpenAuth.Core.xml
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\DotNetOpenAuth.OAuth.xml
@@ -64,7 +61,6 @@ C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\DotNetOpenAuth.OAuth.Consume
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\DotNetOpenAuth.OpenId.xml
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\DotNetOpenAuth.AspNet.xml
-C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Newtonsoft.Json.xml
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\obj\Debug\RedditRSSManagerSite.csprojResolveAssemblyReference.cache
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\obj\Debug\RedditRSSManagerSite.dll
 C:\Projects\reddit-rss-bot\RedditRSSManagerSite\obj\Debug\RedditRSSManagerSite.pdb
@@ -107,3 +103,9 @@ C:\Projects\RedditRSSScheduler\RedditRSSManagerSite\bin\Mono.Math.xml
 C:\Projects\RedditRSSScheduler\RedditRSSManagerSite\obj\Debug\RedditRSSManagerSite.csprojResolveAssemblyReference.cache
 C:\Projects\RedditRSSScheduler\RedditRSSManagerSite\obj\Debug\RedditRSSManagerSite.dll
 C:\Projects\RedditRSSScheduler\RedditRSSManagerSite\obj\Debug\RedditRSSManagerSite.pdb
+C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\RedditRSS.Data.dll
+C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Org.Mentalis.Security.Cryptography.dll
+C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Mono.Math.dll
+C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\RedditRSS.Data.pdb
+C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Org.Mentalis.Security.Cryptography.xml
+C:\Projects\reddit-rss-bot\RedditRSSManagerSite\bin\Mono.Math.xml

@@ -355,9 +355,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RedditRSS\RedditRSS.csproj">
-      <Project>{84edce30-7423-4336-950b-3c8ba622b806}</Project>
-      <Name>RedditRSS</Name>
+    <ProjectReference Include="..\RedditRSS.Data\RedditRSS.Data.csproj">
+      <Project>{b387d3f2-7302-47f4-a582-103f63705078}</Project>
+      <Name>RedditRSS.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

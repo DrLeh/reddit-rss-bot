@@ -1,0 +1,14 @@
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\RedditRSS.Test.exe.config
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\RedditRSS.Test.exe
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\RedditRSS.Test.pdb
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\RedditRSS.dll
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\RedditRSS.Data.dll
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\EntityFramework.dll
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\RedditRSS.pdb
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\RedditRSS.Data.pdb
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\reddit-rss-bot\RedditRSS.Test\bin\Debug\EntityFramework.xml
+C:\Projects\reddit-rss-bot\RedditRSS.Test\obj\Debug\RedditRSS.Test.csprojResolveAssemblyReference.cache
+C:\Projects\reddit-rss-bot\RedditRSS.Test\obj\Debug\RedditRSS.Test.exe
+C:\Projects\reddit-rss-bot\RedditRSS.Test\obj\Debug\RedditRSS.Test.pdb

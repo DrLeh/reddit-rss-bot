@@ -32,3 +32,5 @@ C:\Projects\RedditRSSScheduler\RedditRSS\bin\Debug\EntityFramework.dll
 C:\Projects\RedditRSSScheduler\RedditRSS\bin\Debug\EntityFramework.xml
 C:\Projects\RedditRSSScheduler\RedditRSS\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\RedditRSSScheduler\RedditRSS\obj\Debug\RedditRSS.pdb
+C:\Projects\reddit-rss-bot\RedditRSS\bin\Debug\RedditRSS.Data.dll
+C:\Projects\reddit-rss-bot\RedditRSS\bin\Debug\RedditRSS.Data.pdb

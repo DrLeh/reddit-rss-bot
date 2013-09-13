@@ -53,70 +53,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\RedditRSSBotStatusType.cs">
-      <DependentUpon>RedditRSSData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\RedditSubmission.cs">
-      <DependentUpon>RedditRSSData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Util\CryptUtil.cs" />
-    <Compile Include="Data\AppUser.cs">
-      <DependentUpon>RedditRSSData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\ExpandedObjects.cs" />
-    <Compile Include="Data\RedditRSSBotData.cs">
-      <DependentUpon>RedditRSSData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\RedditRSSData.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RedditRSSData.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\RedditRSSData.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RedditRSSData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\RedditRSSData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RedditRSSData.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\RedditUser.cs">
-      <DependentUpon>RedditRSSData.tt</DependentUpon>
-    </Compile>
     <Compile Include="MessageEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedditLoginData.cs" />
     <Compile Include="RedditRSSBot.cs" />
     <Compile Include="RedditSubmission.cs" />
     <Compile Include="Util\Extensions.cs" />
+    <Compile Include="RedditRSSBotManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="Data\RedditRSSData.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RedditRSSData.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\RedditRSSData.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RedditRSSData.edmx</DependentUpon>
-      <LastGenOutput>RedditRSSData.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Data\RedditRSSData.edmx.diagram">
-      <DependentUpon>RedditRSSData.edmx</DependentUpon>
-    </None>
-    <None Include="Data\RedditRSSData.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RedditRSSData.edmx</DependentUpon>
-      <LastGenOutput>RedditRSSData.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RedditRSS.Data\RedditRSS.Data.csproj">
+      <Project>{b387d3f2-7302-47f4-a582-103f63705078}</Project>
+      <Name>RedditRSS.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

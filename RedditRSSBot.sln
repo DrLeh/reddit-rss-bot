@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20623.1 VSUPREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSS", "RedditRSS\RedditRSS.csproj", "{84EDCE30-7423-4336-950B-3C8BA622B806}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSSManagerSite", "RedditRSSManagerSite\RedditRSSManagerSite.csproj", "{A5B99CBA-3B04-4345-9945-2E58002B7936}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSS.Data", "RedditRSS.Data\RedditRSS.Data.csproj", "{B387D3F2-7302-47F4-A582-103F63705078}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditRSS.Test", "RedditRSS.Test\RedditRSS.Test.csproj", "{FAD905F0-8E3F-4514-AF0A-238666F92E09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +25,14 @@ Global
 		{A5B99CBA-3B04-4345-9945-2E58002B7936}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5B99CBA-3B04-4345-9945-2E58002B7936}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5B99CBA-3B04-4345-9945-2E58002B7936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B387D3F2-7302-47F4-A582-103F63705078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B387D3F2-7302-47F4-A582-103F63705078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B387D3F2-7302-47F4-A582-103F63705078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B387D3F2-7302-47F4-A582-103F63705078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD905F0-8E3F-4514-AF0A-238666F92E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD905F0-8E3F-4514-AF0A-238666F92E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD905F0-8E3F-4514-AF0A-238666F92E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD905F0-8E3F-4514-AF0A-238666F92E09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

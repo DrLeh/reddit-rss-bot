@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RedditRSSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AppUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HashedPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="RedditUsers" Relationship="Self.FK__RedditUse__AppUs__1273C1CD" FromRole="AppUsers" ToRole="RedditUsers" />
+  </EntityType>
+  <EntityType Name="RedditRSSBotData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FeedUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Subreddit" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Interval" Type="Int32" Nullable="false" />
+    <Property Name="RedditUserID" Type="Int32" />
+    <Property Name="StatusTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RedditUser" Relationship="Self.FK__RedditRSS__Reddi__164452B1" FromRole="RedditRSSBotData" ToRole="RedditUsers" />
+    <NavigationProperty Name="RedditRSSBotStatusType" Relationship="Self.FK__RedditRSS__Statu__2E1BDC42" FromRole="RedditRSSBotData" ToRole="RedditRSSBotStatusType" />
+    <NavigationProperty Name="RedditSubmissions" Relationship="Self.FK__RedditSub__Reddi__33D4B598" FromRole="RedditRSSBotData" ToRole="RedditSubmission" />
+  </EntityType>
+  <EntityType Name="RedditRSSBotStatusType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="RedditRSSBotDatas" Relationship="Self.FK__RedditRSS__Statu__2E1BDC42" FromRole="RedditRSSBotStatusType" ToRole="RedditRSSBotData" />
+  </EntityType>
+  <EntityType Name="RedditSubmission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RedditRSSBotDataID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TimeSubmitted" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="RedditRSSBotData" Relationship="Self.FK__RedditSub__Reddi__33D4B598" FromRole="RedditSubmission" ToRole="RedditRSSBotData" />
+  </EntityType>
+  <EntityType Name="RedditUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HashedPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AppUserID" Type="Int32" />
+    <NavigationProperty Name="AppUser" Relationship="Self.FK__RedditUse__AppUs__1273C1CD" FromRole="RedditUsers" ToRole="AppUsers" />
+    <NavigationProperty Name="RedditRSSBotDatas" Relationship="Self.FK__RedditRSS__Reddi__164452B1" FromRole="RedditUsers" ToRole="RedditRSSBotData" />
+  </EntityType>
+  <Association Name="FK__RedditUse__AppUs__1273C1CD">
+    <End Role="AppUsers" Type="Self.AppUser" Multiplicity="0..1" />
+    <End Role="RedditUsers" Type="Self.RedditUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppUsers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditUsers">
+        <PropertyRef Name="AppUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RedditRSS__Reddi__164452B1">
+    <End Role="RedditUsers" Type="Self.RedditUser" Multiplicity="0..1" />
+    <End Role="RedditRSSBotData" Type="Self.RedditRSSBotData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedditUsers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditRSSBotData">
+        <PropertyRef Name="RedditUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RedditRSS__Statu__2E1BDC42">
+    <End Role="RedditRSSBotStatusType" Type="Self.RedditRSSBotStatusType" Multiplicity="1" />
+    <End Role="RedditRSSBotData" Type="Self.RedditRSSBotData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedditRSSBotStatusType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditRSSBotData">
+        <PropertyRef Name="StatusTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RedditSub__Reddi__33D4B598">
+    <End Role="RedditRSSBotData" Type="Self.RedditRSSBotData" Multiplicity="1" />
+    <End Role="RedditSubmission" Type="Self.RedditSubmission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedditRSSBotData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditSubmission">
+        <PropertyRef Name="RedditRSSBotDataID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RedditRSSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AppUsers" EntityType="Self.AppUser" />
+    <EntitySet Name="RedditRSSBotDatas" EntityType="Self.RedditRSSBotData" />
+    <EntitySet Name="RedditRSSBotStatusTypes" EntityType="Self.RedditRSSBotStatusType" />
+    <EntitySet Name="RedditSubmissions" EntityType="Self.RedditSubmission" />
+    <EntitySet Name="RedditUsers" EntityType="Self.RedditUser" />
+    <AssociationSet Name="FK__RedditUse__AppUs__1273C1CD" Association="Self.FK__RedditUse__AppUs__1273C1CD">
+      <End Role="AppUsers" EntitySet="AppUsers" />
+      <End Role="RedditUsers" EntitySet="RedditUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RedditRSS__Reddi__164452B1" Association="Self.FK__RedditRSS__Reddi__164452B1">
+      <End Role="RedditUsers" EntitySet="RedditUsers" />
+      <End Role="RedditRSSBotData" EntitySet="RedditRSSBotDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RedditRSS__Statu__2E1BDC42" Association="Self.FK__RedditRSS__Statu__2E1BDC42">
+      <End Role="RedditRSSBotStatusType" EntitySet="RedditRSSBotStatusTypes" />
+      <End Role="RedditRSSBotData" EntitySet="RedditRSSBotDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RedditSub__Reddi__33D4B598" Association="Self.FK__RedditSub__Reddi__33D4B598">
+      <End Role="RedditRSSBotData" EntitySet="RedditRSSBotDatas" />
+      <End Role="RedditSubmission" EntitySet="RedditSubmissions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

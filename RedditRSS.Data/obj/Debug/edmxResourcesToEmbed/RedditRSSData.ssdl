@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RedditRSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppUsers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="HashedPassword" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RedditRSSBotData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FeedUrl" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Subreddit" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Interval" Type="int" Nullable="false" />
+    <Property Name="RedditUserID" Type="int" />
+    <Property Name="StatusTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RedditRSSBotStatusType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RedditSubmission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RedditRSSBotDataID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="Url" Type="varchar" MaxLength="2000" />
+    <Property Name="Text" Type="varchar(max)" />
+    <Property Name="TimeSubmitted" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RedditUsers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="HashedPassword" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="AppUserID" Type="int" />
+  </EntityType>
+  <Association Name="FK__RedditRSS__Reddi__164452B1">
+    <End Role="RedditUsers" Type="Self.RedditUsers" Multiplicity="0..1" />
+    <End Role="RedditRSSBotData" Type="Self.RedditRSSBotData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedditUsers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditRSSBotData">
+        <PropertyRef Name="RedditUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RedditRSS__Statu__2E1BDC42">
+    <End Role="RedditRSSBotStatusType" Type="Self.RedditRSSBotStatusType" Multiplicity="1" />
+    <End Role="RedditRSSBotData" Type="Self.RedditRSSBotData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedditRSSBotStatusType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditRSSBotData">
+        <PropertyRef Name="StatusTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RedditSub__Reddi__33D4B598">
+    <End Role="RedditRSSBotData" Type="Self.RedditRSSBotData" Multiplicity="1" />
+    <End Role="RedditSubmission" Type="Self.RedditSubmission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedditRSSBotData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditSubmission">
+        <PropertyRef Name="RedditRSSBotDataID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RedditUse__AppUs__1273C1CD">
+    <End Role="AppUsers" Type="Self.AppUsers" Multiplicity="0..1" />
+    <End Role="RedditUsers" Type="Self.RedditUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppUsers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RedditUsers">
+        <PropertyRef Name="AppUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RedditRSSModelStoreContainer">
+    <EntitySet Name="AppUsers" EntityType="Self.AppUsers" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="RedditRSSBotData" EntityType="Self.RedditRSSBotData" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="RedditRSSBotStatusType" EntityType="Self.RedditRSSBotStatusType" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="RedditSubmission" EntityType="Self.RedditSubmission" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="RedditUsers" EntityType="Self.RedditUsers" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <AssociationSet Name="FK__RedditRSS__Reddi__164452B1" Association="Self.FK__RedditRSS__Reddi__164452B1">
+      <End Role="RedditUsers" EntitySet="RedditUsers" />
+      <End Role="RedditRSSBotData" EntitySet="RedditRSSBotData" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RedditRSS__Statu__2E1BDC42" Association="Self.FK__RedditRSS__Statu__2E1BDC42">
+      <End Role="RedditRSSBotStatusType" EntitySet="RedditRSSBotStatusType" />
+      <End Role="RedditRSSBotData" EntitySet="RedditRSSBotData" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RedditSub__Reddi__33D4B598" Association="Self.FK__RedditSub__Reddi__33D4B598">
+      <End Role="RedditRSSBotData" EntitySet="RedditRSSBotData" />
+      <End Role="RedditSubmission" EntitySet="RedditSubmission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RedditUse__AppUs__1273C1CD" Association="Self.FK__RedditUse__AppUs__1273C1CD">
+      <End Role="AppUsers" EntitySet="AppUsers" />
+      <End Role="RedditUsers" EntitySet="RedditUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

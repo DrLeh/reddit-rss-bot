@@ -84,31 +84,15 @@ namespace RedditRSS
 
         #region Methods
 
-        public void Start()
-        {
-            var ctx = new RedditRSSEntities();
-            var botdata = ctx.RedditRSSBotDatas.Where(x => x.ID == this.RedditRSSBotData.ID).FirstOrDefault();
-            ctx.RedditRSSBotDatas.Attach(botdata);
-            botdata.StatusTypeID = 2;
-            ctx.SaveChanges();
-        }
 
-        public void Stop()
-        {
-            var ctx = new RedditRSSEntities();
-            var botdata = ctx.RedditRSSBotDatas.Where(x => x.ID == this.RedditRSSBotData.ID).FirstOrDefault();
-            ctx.RedditRSSBotDatas.Attach(botdata);
-            botdata.StatusTypeID = 3;
-            ctx.SaveChanges();
-        }
-
-        public void CheckAndSubmitNews()
+        public List<RedditSubmission> CheckAndSubmitNews()
         {
             var rsds = Read(READ_COUNT);
             foreach (var rsd in rsds)
             {
                 Submit(rsd);
             }
+            return rsds;
         }
 
         public List<RedditSubmission> Read(int readCount)
@@ -125,6 +109,7 @@ namespace RedditRSS
                     var link = item.Links.FirstOrDefault();
                     rs.Url = link != null ? link.Uri.ToString() : null;
                     rs.RedditRSSBotData = RedditRSSBotData;
+                    rs.TimeSubmitted = DateTime.Now;
                     list.Add(rs);
                 }
             }
