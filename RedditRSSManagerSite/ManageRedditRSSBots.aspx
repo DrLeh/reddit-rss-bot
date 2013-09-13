@@ -8,8 +8,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:UpdatePanel runat="server">
-        <ContentTemplate>
             <asp:Label runat="server" ID="lblMessages" />
             <h2>Add Bots</h2>
             <table>
@@ -51,6 +49,4 @@
             </table>
             <h2>Current Bots</h2>
             <uc:BotList runat="server" ID="ucBotList" DisplayMode="SingleUser" />
-        </ContentTemplate>
-    </asp:UpdatePanel>
 </asp:Content>

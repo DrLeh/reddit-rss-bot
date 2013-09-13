@@ -5,11 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="dec0fe4fabb944d5acb35b543ad7a524" Name="Diagram1">
-        <EntityTypeShape EntityType="RedditRSSModel.AppUser" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RedditRSSModel.RedditRSSBotData" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RedditRSSModel.RedditUser" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="RedditRSSModel.FK__RedditUse__AppUs__1273C1CD" ManuallyRouted="false" />
-        <AssociationConnector Association="RedditRSSModel.FK__RedditRSS__Reddi__164452B1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RedditRSSModel.AppUser" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="RedditRSSModel.RedditRSSBotData" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="RedditRSSModel.RedditRSSBotStatusType" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="RedditRSSModel.RedditSubmission" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="RedditRSSModel.RedditUser" Width="1.5" PointX="3" PointY="1.25" />
+        <AssociationConnector Association="RedditRSSModel.FK__RedditUse__AppUs__1273C1CD" />
+        <AssociationConnector Association="RedditRSSModel.FK__RedditRSS__Reddi__164452B1" />
+        <AssociationConnector Association="RedditRSSModel.FK__RedditRSS__Statu__2E1BDC42" />
+        <AssociationConnector Association="RedditRSSModel.FK__RedditSub__Reddi__33D4B598" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

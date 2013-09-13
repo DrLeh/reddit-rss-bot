@@ -62,13 +62,12 @@ namespace RedditRSSManagerSite
                 FeedUrl = feed,
                 Subreddit = subreddit,
                 RedditUser = user,
-                Interval = interval
+                Interval = interval,
+                StatusTypeID=1
             };
             ctx.RedditRSSBotDatas.Add(botData);
             ctx.SaveChanges();
 
-            var manager = RedditRSSBotManager.Instance;
-            manager.AddBot(botData);
             ucBotList.DataBind();
         }
 

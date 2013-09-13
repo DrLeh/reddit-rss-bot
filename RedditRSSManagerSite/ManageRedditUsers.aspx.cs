@@ -52,9 +52,7 @@ namespace RedditRSSManagerSite
                 var user = ctx.RedditUsers.Where(x => x.ID == id).FirstOrDefault();
                 var botDatas = ctx.RedditRSSBotDatas.Where(x => x.RedditUserID == id).ToList();
 
-                var manager = RedditRSSBotManager.Instance;
-                var botsToRemove = manager.Bots.Where(x => x.RedditRSSBotData.RedditUserID == id).ToList();
-                botsToRemove.ForEach(x => { x.Stop(); manager.Bots.Remove(x); });
+                var botsToRemove = ctx.RedditRSSBotDatas.Where(x => x.RedditUserID == id).ToList();
                 
                 botDatas.ForEach(x => ctx.RedditRSSBotDatas.Remove(x));
                 ctx.RedditUsers.Remove(user);

@@ -18,30 +18,8 @@ namespace RedditRSSManagerSite.Controls
             All
         }
 
-        public RedditRSSBotManager Manager
-        {
-            get { return RedditRSSBotManager.Instance; }
-        }
-
         public BotListDisplayMode DisplayMode { get; set; }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                if(DisplayMode == BotListDisplayMode.SingleUser)
-                    if(UserLoggedIn)
-                        Manager.InitUser((int)CurrentUserID);
-                if (DisplayMode == BotListDisplayMode.All)
-                    Manager.InitAll();
-            }
-        }
-
-        private IEnumerable<RedditRSSBot> GetBots(int appUserID)
-        {
-            return Manager.GetBots(appUserID);
-        }
-
+        
         protected void gvBots_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             var id = int.Parse((string)e.CommandArgument);
@@ -49,15 +27,20 @@ namespace RedditRSSManagerSite.Controls
 
             if (e.CommandName == "StartBot")
             {
-                Manager.StartBot(id);
+                var bot = ctx.RedditRSSBotDatas.Where(x => x.ID == id).FirstOrDefault();
+                if (bot != null)
+                    bot.StatusTypeID = 2;
+                ctx.SaveChanges();
             }
             else if (e.CommandName == "StopBot")
             {
-                Manager.StopBot(id);
+                var bot = ctx.RedditRSSBotDatas.Where(x => x.ID == id).FirstOrDefault();
+                if (bot != null)
+                    bot.StatusTypeID = 3;
+                ctx.SaveChanges();
             }
             else if (e.CommandName == "DeleteBot")
             {
-                Manager.Bots.RemoveAll(x => x.ID == id);
                 var botToRemove = ctx.RedditRSSBotDatas.Where(x => x.ID == id).FirstOrDefault();
                 ctx.RedditRSSBotDatas.Remove(botToRemove);
                 ctx.SaveChanges();
@@ -65,18 +48,23 @@ namespace RedditRSSManagerSite.Controls
             gvBots.DataBind();
         }
 
-        public IQueryable<RedditRSSBot> gvBots_GetData()
+        public IQueryable<RedditRSSBotData> gvBots_GetData()
         {
+            var ctx = new RedditRSSEntities();
+            var results = new List<RedditRSSBotData>().AsQueryable();
             if (this.DisplayMode == BotListDisplayMode.SingleUser)
             {
-                return Manager.GetBots((int)CurrentUserID).AsQueryable();
+                results = ctx.RedditRSSBotDatas.Where(x => x.RedditUser.AppUserID == (int)CurrentUserID);
             }
-            else if (DisplayMode == BotListDisplayMode.CurrentlyRunning || DisplayMode == BotListDisplayMode.All)
+            else if (DisplayMode == BotListDisplayMode.All)
             {
-                return Manager.Bots.AsQueryable();
+                results = ctx.RedditRSSBotDatas;
             }
-            else
-                return null;
+            else if (DisplayMode == BotListDisplayMode.CurrentlyRunning)
+            {
+                results = ctx.RedditRSSBotDatas.Where(x => x.StatusTypeID == 2);
+            }
+            return results;
         }
     }
 }

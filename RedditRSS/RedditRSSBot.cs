@@ -29,15 +29,7 @@ namespace RedditRSS
         public const string REDDIT_URI = "http://www.reddit.com/api/submit";
         private Thread ExecutionThread;
 
-        public enum BotStatus
-        {
-            NotStarted,
-            Started,
-            Stopped
-        }
 
-        public BotStatus CurrentStatus { get; set; }
-        public bool Started { get { return CurrentStatus == BotStatus.Started; } }
         public Queue<RedditSubmission> LastSubmitted { get; set; }
 
         private int _submissionsToStore = 10;
@@ -81,35 +73,41 @@ namespace RedditRSS
             LastSubmitted = new Queue<RedditSubmission>();
         }
 
+        public RedditRSSBot(RedditRSSBotData data)
+        {
+            LastSubmitted = new Queue<RedditSubmission>();
+            RedditRSSBotData = data;
+        }
+
         #endregion
 
 
         #region Methods
 
-
         public void Start()
         {
-            CurrentStatus = BotStatus.Started;
-            ExecutionThread = new Thread(new ThreadStart(WatchFeed));
-            ExecutionThread.Start();
+            var ctx = new RedditRSSEntities();
+            var botdata = ctx.RedditRSSBotDatas.Where(x => x.ID == this.RedditRSSBotData.ID).FirstOrDefault();
+            ctx.RedditRSSBotDatas.Attach(botdata);
+            botdata.StatusTypeID = 2;
+            ctx.SaveChanges();
         }
 
         public void Stop()
         {
-            CurrentStatus = BotStatus.Stopped;
-            ExecutionThread.Abort();
+            var ctx = new RedditRSSEntities();
+            var botdata = ctx.RedditRSSBotDatas.Where(x => x.ID == this.RedditRSSBotData.ID).FirstOrDefault();
+            ctx.RedditRSSBotDatas.Attach(botdata);
+            botdata.StatusTypeID = 3;
+            ctx.SaveChanges();
         }
 
-        public void WatchFeed()
+        public void CheckAndSubmitNews()
         {
-            while (true)
+            var rsds = Read(READ_COUNT);
+            foreach (var rsd in rsds)
             {
-                var rsds = Read(READ_COUNT);
-                foreach (var rsd in rsds)
-                {
-                    Submit(rsd);
-                }
-                Thread.Sleep(Interval * 60 * 1000);
+                Submit(rsd);
             }
         }
 
@@ -126,9 +124,7 @@ namespace RedditRSS
                     rs.Title = item.Title.Text;
                     var link = item.Links.FirstOrDefault();
                     rs.Url = link != null ? link.Uri.ToString() : null;
-                    rs.SubReddit = RedditRSSBotData.Subreddit;
-                    rs.Username = RedditRSSBotData.RedditUser.Username;
-                    rs.Password = RedditRSSBotData.RedditUser.Password;
+                    rs.RedditRSSBotData = RedditRSSBotData;
                     list.Add(rs);
                 }
             }
@@ -156,10 +152,6 @@ namespace RedditRSS
             return loginData;
         }
 
-        public void Submit(string title, string url, string subreddit, string username, string password)
-        {
-            Submit(new RedditSubmission() { Title = title, Url = url, SubReddit = subreddit, Username = username, Password = password });
-        }
 
         public void Submit(RedditSubmission rs)
         {
@@ -167,15 +159,18 @@ namespace RedditRSS
             if (!LastSubmitted.Any(x => x.Equals(rs)))
             {
                 //need to try storing this instead of doing it on every submit. might need to do it anyway though.
-                var loginData = Login(rs.Username, rs.Password);
+                var username = rs.RedditRSSBotData.RedditUser.Username;
+                var password = rs.RedditRSSBotData.RedditUser.Password;
+                var subreddit = rs.RedditRSSBotData.Subreddit;
+                var loginData = Login(username, password);
                 if (!string.IsNullOrEmpty(loginData.modhash))
                 {
                     var parameters = "";
                     parameters += "kind=link";
                     parameters += "&url=" + HttpUtility.UrlEncode(rs.Url);
                     parameters += "&title=" + HttpUtility.UrlEncode(rs.Title);
-                    parameters += "&sr=" + HttpUtility.UrlEncode(rs.SubReddit);
-                    parameters += "&r=" + HttpUtility.UrlEncode(rs.SubReddit);
+                    parameters += "&sr=" + HttpUtility.UrlEncode(subreddit);
+                    parameters += "&r=" + HttpUtility.UrlEncode(subreddit);
                     parameters += "&uh=" + HttpUtility.UrlEncode(loginData.modhash);
 
                     var cookies = new CookieContainer();
@@ -201,12 +196,12 @@ namespace RedditRSS
                         else if (response.Contains("that link has already been submitted"))
                         {
                             tryAgainMessageReceieved = false;
-                            OnSendMessage("This link has already been submitted: /r/" + rs.SubReddit + " Title: " + rs.Title + " url: " + rs.Url);
+                            OnSendMessage("This link has already been submitted: /r/" + subreddit + " Title: " + rs.Title + " url: " + rs.Url);
                         }
                         else
                         {
                             tryAgainMessageReceieved = false;
-                            OnSendMessage("Post submitted: /r/" + rs.SubReddit + " Title: " + rs.Title + " url: " + rs.Url);
+                            OnSendMessage("Post submitted: /r/" + subreddit + " Title: " + rs.Title + " url: " + rs.Url);
                         }
                     }
                     LastSubmitted.Enqueue(rs);

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="RedditRSSEntities-Web.config Connection String" description="RedditRSSEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Data.RedditRSSData.csdl|res://*/Data.RedditRSSData.ssdl|res://*/Data.RedditRSSData.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=RedditRSS;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\Devon\\SkyDrive\\Projects\\reddit-rss-bot\\RedditRSSManagerSite\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='RedditRSSEntities']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Projects\\RedditRSSScheduler\\RedditRSSManagerSite\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='RedditRSSEntities']/@connectionString" />
   </parameter>
 </parameters>

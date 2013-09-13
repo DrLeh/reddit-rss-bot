@@ -14,12 +14,20 @@ namespace RedditRSS.Data
     
     public partial class RedditRSSBotData
     {
+        public RedditRSSBotData()
+        {
+            this.RedditSubmissions = new HashSet<RedditSubmission>();
+        }
+    
         public int ID { get; set; }
         public string FeedUrl { get; set; }
         public string Subreddit { get; set; }
         public int Interval { get; set; }
         public Nullable<int> RedditUserID { get; set; }
+        public int StatusTypeID { get; set; }
     
         public virtual RedditUser RedditUser { get; set; }
+        public virtual RedditRSSBotStatusType RedditRSSBotStatusType { get; set; }
+        public virtual ICollection<RedditSubmission> RedditSubmissions { get; set; }
     }
 }

@@ -8,3 +8,12 @@ C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\EntityFram
 C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\bin\Release\Newtonsoft.Json.xml
 C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\obj\Release\RedditRSS.dll
 C:\Users\Devon\SkyDrive\Projects\reddit-rss-bot\RedditRSS\obj\Release\RedditRSS.pdb
+C:\Projects\RedditRSSScheduler\RedditRSS\bin\Release\RedditRSS.dll.config
+C:\Projects\RedditRSSScheduler\RedditRSS\bin\Release\RedditRSS.dll
+C:\Projects\RedditRSSScheduler\RedditRSS\bin\Release\RedditRSS.pdb
+C:\Projects\RedditRSSScheduler\RedditRSS\bin\Release\EntityFramework.dll
+C:\Projects\RedditRSSScheduler\RedditRSS\bin\Release\EntityFramework.xml
+C:\Projects\RedditRSSScheduler\RedditRSS\bin\Release\Newtonsoft.Json.xml
+C:\Projects\RedditRSSScheduler\RedditRSS\obj\Release\RedditRSS.csprojResolveAssemblyReference.cache
+C:\Projects\RedditRSSScheduler\RedditRSS\obj\Release\RedditRSS.dll
+C:\Projects\RedditRSSScheduler\RedditRSS\obj\Release\RedditRSS.pdb

@@ -27,6 +27,8 @@ namespace RedditRSS.Data
     
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<RedditRSSBotData> RedditRSSBotDatas { get; set; }
+        public DbSet<RedditRSSBotStatusType> RedditRSSBotStatusTypes { get; set; }
+        public DbSet<RedditSubmission> RedditSubmissions { get; set; }
         public DbSet<RedditUser> RedditUsers { get; set; }
     }
 }
